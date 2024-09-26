@@ -6,7 +6,7 @@ import moment from 'moment';
 import Navbar from "../components/Navbar.tsx";
 import Footer from "../components/Footer.tsx";
 
-// Define the Task type for TypeScript
+
 interface Task {
   _id: string;
   taskName: string;
@@ -16,15 +16,15 @@ interface Task {
 }
 
 const App: React.FC = () => {
-  const [tasks, setTasks] = useState<Task[]>([]); // State to store task list
-  const [form] = Form.useForm(); // Create a form instance
-  const [editingTask, setEditingTask] = useState<Task | null>(null); // State for the task being edited
-  const [searchTerm, setSearchTerm] = useState<string>(''); // State for the search term
+  const [tasks, setTasks] = useState<Task[]>([]); 
+  const [form] = Form.useForm(); 
+  const [editingTask, setEditingTask] = useState<Task | null>(null); 
+  const [searchTerm, setSearchTerm] = useState<string>(''); 
 
-  // Fetch tasks from the backend
+  
   const fetchTasks = async () => {
     try {
-      const response = await axios.get('http://localhost:4000/api/v1/task/getAllTask');
+      const response = await axios.get('https://raftlab.vercel.app/api/v1/task/getAllTask');
       setTasks(response.data.tasks);
     } catch (error) {
       console.error('Error fetching tasks:', error);
@@ -32,7 +32,7 @@ const App: React.FC = () => {
     }
   };
 
-  // Fetch tasks on component mount
+ 
   useEffect(() => {
     fetchTasks();
   }, []);
@@ -40,15 +40,15 @@ const App: React.FC = () => {
   // Function to handle search
   const handleSearch = async () => {
     try {
-      const response = await axios.get(`http://localhost:4000/api/v1/task/search?taskName=${searchTerm}`);
-      setTasks(response.data.tasks); // Update task list with search results
+      const response = await axios.get(`https://raftlab.vercel.app/api/v1/task/search?taskName=${searchTerm}`);
+      setTasks(response.data.tasks); 
     } catch (error) {
       console.error('Error searching tasks:', error);
       message.error('Failed to search tasks. Please try again.');
     }
   };
 
-  // Function to handle form submission and make the API request
+  
   const onFinish = async (values: any) => {
     try {
       const taskData = {
@@ -59,35 +59,35 @@ const App: React.FC = () => {
       };
 
       if (editingTask) {
-        await axios.put(`http://localhost:4000/api/v1/task/update/${editingTask._id}`, taskData);
+        await axios.put(`https://raftlab.vercel.app/api/v1/task/update/${editingTask._id}`, taskData);
         message.success('Task updated successfully!');
       } else {
-        await axios.post('http://localhost:4000/api/v1/task/post', taskData);
+        await axios.post('https://raftlab.vercel.app/api/v1/task/post', taskData);
         message.success('Task added successfully!');
       }
 
       form.resetFields();
       setEditingTask(null);
-      fetchTasks(); // Refresh the task list
+      fetchTasks(); 
     } catch (error) {
       console.error('Error adding/updating tasks:', error);
       message.error('Failed to add/update tasks. Please try again.');
     }
   };
 
-  // Function to delete a task
+  
   const handleDelete = async (id: string) => {
     try {
-      await axios.delete(`http://localhost:4000/api/v1/task/delete/${id}`);
+      await axios.delete(`https://raftlab.vercel.app/api/v1/task/delete/${id}`);
       message.success('Task deleted successfully!');
-      fetchTasks(); // Refresh the task list
+      fetchTasks(); 
     } catch (error) {
       console.error('Error deleting task:', error);
       message.error('Failed to delete task. Please try again.');
     }
   };
 
-  // Function to start editing a task
+ 
   const handleEdit = (task: Task) => {
     setEditingTask(task);
     form.setFieldsValue({
@@ -104,12 +104,12 @@ const App: React.FC = () => {
     <>
       <Navbar/>
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', height: '100vh' }}> 
-        {/* Search Section */}
+       
         <Space style={{ marginBottom: 20 }}>
           <Input
             placeholder="Search Task"
             value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)} // Update search term state
+            onChange={(e) => setSearchTerm(e.target.value)} 
             style={{ width: 300 }}
           />
           <Button type="primary" icon={<SearchOutlined />} onClick={handleSearch}>
@@ -139,7 +139,7 @@ const App: React.FC = () => {
           )}
         />
 
-        {/* Add/Edit Task Form */}
+        
         <Form
           form={form}
           name="dynamic_form_nest_item"
