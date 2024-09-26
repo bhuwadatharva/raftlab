@@ -1,4 +1,4 @@
-import React from 'react';
+
 import raftlabs from "../src/assets/raftlabs.png"
 
 const Navbar = () => {
