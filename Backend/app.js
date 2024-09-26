@@ -10,10 +10,10 @@ const app = express();
 
 
 
-// Serve static files from the "files" directory
 
 
-// Configure environment variables
+
+
 config({ path: "./config/config.env" });
 
 app.use(cors({
@@ -22,7 +22,7 @@ app.use(cors({
   credentials: true,
 }));
 
-//app.use(cookieParser());
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -32,16 +32,12 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/v1/task", taskRouter);
 
-// Handle message sending
 
 
-// Connect to the database
+
+
 dbConnection();
 
-// Error handling middleware
-
-
-// Route for uploading files
 
   
 app.use(errormiddleWare);
