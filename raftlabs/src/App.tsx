@@ -24,7 +24,7 @@ const App: React.FC = () => {
   
   const fetchTasks = async () => {
     try {
-      const response = await axios.get('https://raftlab.vercel.app/api/v1/task/getAllTask');
+      const response = await axios.get('https://raftlab.onrender.com/api/v1/task/getAllTask');
       setTasks(response.data.tasks);
     } catch (error) {
       console.error('Error fetching tasks:', error);
@@ -40,7 +40,7 @@ const App: React.FC = () => {
   // Function to handle search
   const handleSearch = async () => {
     try {
-      const response = await axios.get(`https://raftlab.vercel.app/api/v1/task/search?taskName=${searchTerm}`);
+      const response = await axios.get(`https://raftlab.onrender.com/api/v1/task/search?taskName=${searchTerm}`);
       setTasks(response.data.tasks); 
     } catch (error) {
       console.error('Error searching tasks:', error);
@@ -59,10 +59,10 @@ const App: React.FC = () => {
       };
 
       if (editingTask) {
-        await axios.put(`https://raftlab.vercel.app/api/v1/task/update/${editingTask._id}`, taskData);
+        await axios.put(`https://raftlab.onrender.com/api/v1/task/update/${editingTask._id}`, taskData);
         message.success('Task updated successfully!');
       } else {
-        await axios.post('https://raftlab.vercel.app/api/v1/task/post', taskData);
+        await axios.post('https://raftlab.onrender.com/api/v1/task/post', taskData);
         message.success('Task added successfully!');
       }
 
@@ -78,7 +78,7 @@ const App: React.FC = () => {
   
   const handleDelete = async (id: string) => {
     try {
-      await axios.delete(`https://raftlab.vercel.app/api/v1/task/delete/${id}`);
+      await axios.delete(`https://raftlab.onrender.com/api/v1/task/delete/${id}`);
       message.success('Task deleted successfully!');
       fetchTasks(); 
     } catch (error) {
