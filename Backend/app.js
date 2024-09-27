@@ -7,9 +7,7 @@ import { dbConnection } from "./database/dbConnection.js";
 
 const app = express();
 
-app.use("/",(req, res)=> {
-  res.send("Server is Running");
-});
+
 
 
 config({ path: "./config/config.env" });
