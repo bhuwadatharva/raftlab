@@ -7,17 +7,9 @@ import { dbConnection } from "./database/dbConnection.js";
 
 const app = express();
 
-const allowedOrigins = ['https://raftlab-1txb.vercel.app/', 'https://raftlab.onrender.com/']; // Add your deployed frontend URL here
-
-app.use(cors({
-    origin: function (origin, callback) {
-        if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-            callback(null, true);
-        } else {
-            callback(new Error('Not allowed by CORS'));
-        }
-    }
-}));
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE');
+header('Access-Control-Allow-Headers: Content-Type, X-Auth-Token, Origin, Authorization');
 
 
 
